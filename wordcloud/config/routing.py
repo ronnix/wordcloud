@@ -21,7 +21,4 @@ def make_map(config):
     # CUSTOM ROUTES HERE
     map.connect('/wordcloud', controller='main', action='process')
 
-    # map.connect('/{controller}/{action}')
-    # map.connect('/{controller}/{action}/{id}')
-
     return map

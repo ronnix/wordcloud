@@ -11,6 +11,7 @@ from wordcloud.lib.base import BaseController
 from wordcloud.lib.base import render
 
 
+# One or more spaces or punctuation characters
 SPLIT_RE = re.compile(r'[\s\(\)\[\]\/\-\'‘’,\.]+')
 
 
@@ -28,30 +29,24 @@ class MainController(BaseController):
     """
     def process(self):
         """
-        Web service
+        Web service to generate a HTML tag cloud
+        based on text fetched from a given URL
         """
-        # Get input text
+        # Get the input text from given URL
         url = request.GET.get('text', '').decode('utf8')
         text = urlopen(url).read()
 
-        # Split words
+        # Split into words (ignoring words smaller than 4 characters)
         words = [w for w in SPLIT_RE.split(text) if len(w) >= 4]
 
-        # Count frequencies
+        # Count words frequencies
         freq = defaultdict(int)
         for word in words:
             freq[word] += 1
 
-        # Keep 
+        # Keep the 9 most frequent words
         most_freq = sorted([(v,k) for k,v in freq.iteritems()], reverse=True)[:9]
         freq = dict([(k,v) for v,k in most_freq])
-
-        # How many classes
-        c.classes = sorted(list(set(freq.values())))
-        c.nb_classes = len(c.classes)
-        class_names = {}
-        for i, value in enumerate(c.classes):
-            class_names[value] = CLASS_NAMES[i]
 
         # Sort elements by freq then alpha
         elem = sorted([(v, w) for w, v in freq.iteritems()])
