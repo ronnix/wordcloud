@@ -1,0 +1,3 @@
+include wordcloud/config/deployment.ini_tmpl
+recursive-include wordcloud/public *
+recursive-include wordcloud/templates *
