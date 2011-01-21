@@ -1,19 +1,17 @@
-This file is for you to describe the wordcloud application. Typically
-you would include information such as the information below:
 
 Installation and Setup
 ======================
 
-Install ``wordcloud`` using easy_install::
+Make a Python virtual environment::
 
-    easy_install wordcloud
+    virtualenv --no-site-packages .
+    source bin/activate
 
-Make a config file as follows::
+Install dependencies in the virtualenv::
 
-    paster make-config wordcloud config.ini
+    pip install -r requirements.txt
 
-Tweak the config file as appropriate and then setup the application::
+Start the server::
 
-    paster setup-app config.ini
+    paster serve development.ini
 
-Then you are ready to go.
